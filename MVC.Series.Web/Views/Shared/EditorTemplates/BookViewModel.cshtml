@@ -1,0 +1,48 @@
+﻿@using MVC.Series.Web.Extensions
+@model MVC.Series.ViewModel.BookViewModel
+
+<dl class="dl-horizontal" id="@Model.UniqueId">
+
+    @using ( Html.BeginCollectionItem( "NewBooks" ) )
+    {
+        <dt>
+            @Html.DisplayNameFor( model => @Model.Title )
+        </dt>
+        <dd>
+            @Html.EditorFor( model => @Model.Title )
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor( model => @Model.Author )
+        </dt>
+        <dd>
+            @Html.EditorFor( model => @Model.Author )
+        </dd>
+
+        <dt>
+            @Html.DisplayName( "Book Cover File Image" )
+        </dt>
+        <dd>
+            @Html.TextBoxFor( m => @Model.BookCoverUrl, null, new { type = "file", @class = "input-file" } )
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor( model => @Model.Characters )
+        </dt>
+        <dd>
+            @for ( int i = 0; i < @Model.Characters.Count(); i++ )
+            {
+                @Html.EditorFor( model => @Model.Characters[i] )
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor( model => @Model.Publisher )
+        </dt>
+        <dd>
+            @Html.EditorFor( model => @Model.Publisher )
+        </dd>
+
+        <input type="button" id="Delete" name="Delete" value="Delete" onclick="javascript: deleteBook(document.getElementById('@Model.UniqueId'))" />
+    }
+</dl>
